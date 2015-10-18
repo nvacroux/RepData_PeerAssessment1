@@ -1,7 +1,9 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
 By:  Nicolas Vacroux
-output: html_document
+output:
+    html_document:
+        keep_md: yes
 ---
 ## Introduction
 This project satisfies the Johns Hopkins Reproducible Research course offered through Coursera, Project 1 requirements.  It loads a data set, performs some processing, and produces some charts.  The data involved concerns the number of steps taken as recorded by a Fitbit or other similar device.
@@ -14,7 +16,7 @@ if (!exists("rawdata")){
 }
 ```
 
-The data is then aggregated by date and a histogram produced displaying the data.  This histogram is devided into 20 buckets, which was arbitrarily chosen.
+The data is then aggregated by date and a histogram produced displaying the data.  This histogram is divided into 20 buckets, which was arbitrarily chosen.
 ```{r, echo=TRUE, fig.align="center"}
 data <- aggregate(steps ~ date, data=rawdata, sum, na.rm = TRUE)
 hist(data$steps, breaks=20, main="Total Steps per Day", xlab="Steps", ylab="Frequency")
@@ -59,7 +61,7 @@ bsteps_median <- median(betterdata$steps)
 print(paste("The mean is: ", bsteps_mean))
 print(paste("The median is: ", bsteps_median))
 ```
-These results for mean and median are not surprising as the median of the uncorrected set is 0, so replacing NAs with zeros unsurprisingly a) reduces the mean and b) has no impact on the median.
+These results for mean and median are not surprising as the median of the uncorrected set is `r rawsteps_median`, so replacing NAs with this unsurprisingly a) reduces the mean and b) has no impact on the median.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 In order to quickly determine if there are activity differences between weekends and weekdays we simply plot two graphs, one with weekday data and one with weekend data.  By plotting one above the other our x-axes are identical enabling us to "eyeball" (a time-honored scientific method) the graphs to note any differences.
